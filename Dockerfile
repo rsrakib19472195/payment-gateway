@@ -1,13 +1,24 @@
 FROM php:8.3-apache
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libsqlite3-dev pkg-config \
+    && apt-get install -y --no-install-recommends \
+       libsqlite3-dev \
+       pkg-config \
+       git \
+       unzip \
+       libzip-dev \
     && docker-php-ext-install pdo_sqlite \
     && rm -rf /var/lib/apt/lists/*
 
 RUN a2enmod rewrite headers
 
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
 COPY . /var/www/html/
+
+WORKDIR /var/www/html
+
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 RUN mkdir -p /var/www/html/data \
     && chown -R www-data:www-data /var/www/html/data \
