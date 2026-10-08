@@ -7,7 +7,13 @@ RUN apt-get update \
        git \
        unzip \
        libzip-dev \
+       autoconf \
+       gcc \
+       g++ \
+       make \
     && docker-php-ext-install pdo_sqlite \
+    && pecl install grpc \
+    && docker-php-ext-enable grpc \
     && rm -rf /var/lib/apt/lists/*
 
 RUN a2enmod rewrite headers
