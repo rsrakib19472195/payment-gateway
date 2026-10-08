@@ -1,0 +1,20 @@
+Twixo Free Use License
+https://twixo.sweez.xyz
+
+Copyright (c) Twixo / Sweez
+
+Permission is granted to use, copy, modify, and distribute this software
+free of charge for personal and commercial projects, subject to:
+
+1. Twixo branding MUST remain visible on all payment UI pages
+   (the "Powered by Twixo" watermark and logo linking to
+   https://twixo.sweez.xyz). Removing, hiding, or bypassing the branding
+   include (includes/twixo_brand.php) is not allowed under this free license.
+
+2. You may not rebrand this software as your own payment product or sell
+   the source as a competing payment automation product.
+
+3. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+For commercial white-label / unbranded licensing, contact Sweez via
+https://twixo.sweez.xyz
