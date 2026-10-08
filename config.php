@@ -88,19 +88,13 @@ if (!defined('SESSION_LIFETIME')) {
 
 date_default_timezone_set('Asia/Dhaka');
 
-// Database (override via config.local.php)
-if (!isset($servername)) {
-    $servername = 'localhost';
-}
-if (!isset($username)) {
-    $username = 'twixo_user';
-}
-if (!isset($password)) {
-    $password = 'CHANGE_ME_DB_PASSWORD';
-}
-if (!isset($dbname)) {
-    $dbname = 'twixo';
-}
+// Database — Render environment variables
+$servername = getenv('DB_HOST') ?: 'localhost';
+$port       = getenv('DB_PORT') ?: '3306';
+$username   = getenv('DB_USER') ?: 'twixo_user';
+$password   = getenv('DB_PASSWORD') ?: '';
+$dbname     = getenv('DB_NAME') ?: 'twixo';
+$sslMode    = getenv('DB_SSL') ?: 'REQUIRED';
 
 $conn = null;
 
