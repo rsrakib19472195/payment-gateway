@@ -103,20 +103,33 @@ if (!isset($dbname)) {
 }
 
 $conn = null;
+
 try {
+    $dsn = "mysql:host={$servername};port={$port};dbname={$dbname};charset=utf8mb4";
+
+    $pdoOptions = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
+
+    // Aiven MySQL requires encrypted connection.
+    if (strtoupper($sslMode ?? 'REQUIRED') === 'REQUIRED') {
+        $pdoOptions[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+    }
+
     $conn = new PDO(
-        "mysql:host=$servername;dbname=$dbname;charset=utf8mb4",
+        $dsn,
         $username,
-        $password
+        $password,
+        $pdoOptions
     );
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
     error_log('Twixo DB connection failed: ' . $e->getMessage());
     $conn = null;
     // API endpoints that need DB will return an error; UI pages can still render.
 }
-
 function get_client_ip(): string {
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         return $_SERVER['HTTP_CLIENT_IP'];
