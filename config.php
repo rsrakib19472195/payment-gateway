@@ -19,7 +19,7 @@ if (!defined('DEBUG_MODE')) {
 
 // Application settings
 if (!defined('APP_NAME')) {
-    define('APP_NAME', 'Twixo');
+    define('APP_NAME', 'AURA ARMAN TOUR');
 }
 if (!defined('APP_VERSION')) {
     define('APP_VERSION', '1.0.0');
@@ -33,7 +33,7 @@ if (!defined('TWIXO_BRAND')) {
     define('TWIXO_BRAND', 'Twixo');
 }
 if (!defined('TWIXO_URL')) {
-    define('TWIXO_URL', 'https://twixo.sweez.xyz');
+    define('TWIXO_URL', 'https://aura-skill-com.onrender.com');
 }
 if (!defined('TWIXO_LOGO_URL')) {
     define('TWIXO_LOGO_URL', 'https://twixo.sweez.xyz/twixo.png');
@@ -58,10 +58,10 @@ if (!defined('CALLBACK_API_URL')) {
 
 // Payment gateway numbers (set in config.local.php)
 if (!defined('BKASH_NUMBER')) {
-    define('BKASH_NUMBER', '01XXXXXXXXX');
+    define('BKASH_NUMBER', '01738990063');
 }
 if (!defined('NAGAD_NUMBER')) {
-    define('NAGAD_NUMBER', '01XXXXXXXXX');
+    define('NAGAD_NUMBER', '01755317439');
 }
 if (!defined('ROCKET_NUMBER')) {
     define('ROCKET_NUMBER', '01XXXXXXXXX');
@@ -80,7 +80,7 @@ if (!defined('SMS_API_KEY')) {
 
 // Security
 if (!defined('ENCRYPTION_KEY')) {
-    define('ENCRYPTION_KEY', 'CHANGE_ME_LONG_RANDOM_STRING');
+    define('ENCRYPTION_KEY', '19472195');
 }
 if (!defined('SESSION_LIFETIME')) {
     define('SESSION_LIFETIME', 3600);
