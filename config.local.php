@@ -28,3 +28,16 @@ $password   = getenv('DB_PASSWORD') ?: '';
 $dbname     = getenv('DB_NAME') ?: 'twixo';
 
 // Do NOT redefine TWIXO_BRAND / TWIXO_URL — required for free use.
+$sslMode = getenv('DB_SSL') ?: 'REQUIRED';
+
+$dsn = "mysql:host={$servername};port={$port};dbname={$dbname};charset=utf8mb4";
+
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+if (strtoupper($sslMode) === 'REQUIRED') {
+    $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+}
