@@ -21,9 +21,10 @@ define('ENCRYPTION_KEY', 'generate-another-long-random-string');
 // Absolute URL to this install's callback.php
 define('CALLBACK_API_URL', 'https://yourdomain.com/pay/callback.php');
 
-$servername = 'localhost';
-$username   = 'twixo_user';
-$password   = 'your_strong_password';
-$dbname     = 'twixo';
+$servername = getenv('DB_HOST') ?: 'localhost';
+$port       = getenv('DB_PORT') ?: '3306';
+$username   = getenv('DB_USER') ?: 'twixo_user';
+$password   = getenv('DB_PASSWORD') ?: '';
+$dbname     = getenv('DB_NAME') ?: 'twixo';
 
 // Do NOT redefine TWIXO_BRAND / TWIXO_URL — required for free use.
