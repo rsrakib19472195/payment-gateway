@@ -1,26 +1,28 @@
 FROM php:8.3-apache
 
-# Required system packages
+# System dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
     libzip-dev \
+    $PHPIZE_DEPS \
     && docker-php-ext-install zip \
-    && rm -rf /var/lib/apt/lists/*
+    && pecl install grpc \
+    && docker-php-ext-enable grpc \
+    && rm -rf /var/lib/apt/lists/* /tmp/pear
 
-# Enable Apache rewrite
+# Apache rewrite
 RUN a2enmod rewrite
 
-# Install Composer
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www/html
 
-# Copy Composer files first for Docker cache
+# Composer files first for Docker cache
 COPY composer.json composer.lock* ./
 
-# Install PHP dependencies without dev packages
+# Install dependencies
 RUN composer install \
     --no-dev \
     --prefer-dist \
@@ -28,10 +30,9 @@ RUN composer install \
     --no-progress \
     --optimize-autoloader
 
-# Copy application
+# Application files
 COPY . .
 
-# Apache permissions
 RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
