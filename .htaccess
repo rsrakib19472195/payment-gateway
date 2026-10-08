@@ -1,0 +1,12 @@
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Headers "Content-Type, X-Access-Key, Authorization"
+    Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+</IfModule>
+
+# Protect local database and logs.
+<FilesMatch "\.(sqlite|log|db)$">
+    Require all denied
+</FilesMatch>
